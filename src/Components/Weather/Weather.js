@@ -10,10 +10,11 @@ class Weather extends Component {
     tempMax: "",
     currentTemp: "",
     humidity: "",
-    conditions: ""
+    conditions: "",
+    weather: null
   };
 
-  componentDidMount() {
+  getWeather() {
     const API_KEY = "e6fa7fb8ebd4360f3b425e454668c79b";
     axios
       .get(
@@ -36,7 +37,12 @@ class Weather extends Component {
       .catch(err => {
         console.error(err);
       });
-    // this.btnHandler = this.btnHandler.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.weather) {
+      this.getWeather();
+    }
   }
 
   handleChange = e => {
@@ -48,8 +54,7 @@ class Weather extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.componentDidMount();
-    console.log(this.state);
+    this.getWeather();
   };
   render() {
     return (
@@ -61,7 +66,7 @@ class Weather extends Component {
             placeholder="City"
             onChange={this.handleChange}
           />
-          <input type="text" placeholder="State" />
+          <input type="text" placeholder="Country" />
           <button type="submit">Submit</button>
         </form>
         <p>City: {this.state.city}</p>
