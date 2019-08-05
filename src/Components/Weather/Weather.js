@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import styles from "./Weather.module.css";
 
 class Weather extends Component {
   state = {
@@ -58,24 +59,34 @@ class Weather extends Component {
   };
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className={styles.weather}>
+        <ul className={styles.info}>
+          <li>City: {this.state.city}</li>
+          <li>Country: {this.state.country}</li>
+          <li>Conditions: {this.state.conditions}</li>
+          <li>Humidity: {this.state.humidity}</li>
+          <li>Current Temp: {this.state.currentTemp}</li>
+          <li>Est High: {this.state.tempMax}</li>
+          <li>Est Low: {this.state.tempMin}</li>
+        </ul>
+
+        <form className={styles.inputForm} onSubmit={this.handleSubmit}>
           <input
+            className={styles.inputForm}
             type="text"
             value={this.state.value}
             placeholder="City"
             onChange={this.handleChange}
           />
-          <input type="text" placeholder="Country" />
-          <button type="submit">Submit</button>
+          <input
+            className={styles.inputForm}
+            type="text"
+            placeholder="Country"
+          />
+          <button className={styles.inputForm} type="submit">
+            Submit
+          </button>
         </form>
-        <p>City: {this.state.city}</p>
-        <p>Country: {this.state.country}</p>
-        <p>Conditions: {this.state.conditions}</p>
-        <p>Humidity: {this.state.humidity}</p>
-        <p>Current Temp: {this.state.currentTemp}</p>
-        <p>Est High: {this.state.tempMax}</p>
-        <p>Est Low: {this.state.tempMin}</p>
       </div>
     );
   }
