@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styles from "./Weather.module.css";
+import Clock from "react-live-clock";
 
 class Weather extends Component {
   state = {
@@ -61,15 +62,17 @@ class Weather extends Component {
     return (
       <div className={styles.weather}>
         <ul className={styles.info}>
-          <li>City: {this.state.city}</li>
-          <li>Country: {this.state.country}</li>
-          <li>Conditions: {this.state.conditions}</li>
-          <li>Humidity: {this.state.humidity}</li>
-          <li>Current Temp: {this.state.currentTemp}</li>
-          <li>Est High: {this.state.tempMax}</li>
-          <li>Est Low: {this.state.tempMin}</li>
+          <li>
+            Current time: <Clock format={"hh:mm:ss"} ticking={true} />
+          </li>
+          <li>City: &nbsp; {this.state.city}</li>
+          <li>Country:&nbsp; {this.state.country}</li>
+          <li>Conditions: &nbsp; {this.state.conditions}</li>
+          <li>Humidity:&nbsp; {this.state.humidity}</li>
+          <li>Current Temp: &nbsp; {this.state.currentTemp}</li>
+          <li>Est High: &nbsp; {this.state.tempMax}</li>
+          <li>Est Low: &nbsp; {this.state.tempMin}</li>
         </ul>
-
         <form className={styles.inputForm} onSubmit={this.handleSubmit}>
           <input
             className={styles.inputForm}
