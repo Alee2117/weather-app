@@ -1,10 +1,32 @@
 import React, { Component } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  WiDaySunny,
+  WiDayRain,
+  WiDayCloudy,
+  WiDayFog,
+  WiDayThunderstorm,
+  WiDaySnow,
+  WiHumidity
+} from "weather-icons-react";
+import {
+  WiNightAltSunny,
+  WiNightAltRain,
+  WiNightAltCloudy,
+  WiNightAltFog,
+  WiNightAltThunderstorm,
+  WiNightAltSnow
+} from "weather-icons-react";
 import axios from "axios";
 import styles from "./Weather.module.css";
 import Clock from "react-live-clock";
 
 class Weather extends Component {
   state = {
+    visible: false,
     value: "",
     city: "",
     country: "",
@@ -13,6 +35,7 @@ class Weather extends Component {
     currentTemp: "",
     humidity: "",
     conditions: "",
+    icons: "",
     weather: null
   };
 
@@ -20,30 +43,30 @@ class Weather extends Component {
     const API_KEY = "e6fa7fb8ebd4360f3b425e454668c79b";
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${
-          this.state.value
-        }&appid=${API_KEY}&units=imperial`
+        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${API_KEY}&units=imperial`
       )
       .then(res => {
         console.log(res);
         this.setState({
+          visible: true,
           city: res.data.name,
           country: res.data.sys.country,
           tempMin: res.data.main.temp_min,
           tempMax: res.data.main.temp_max,
           currentTemp: res.data.main.temp,
           humidity: res.data.main.humidity,
-          conditions: res.data.weather[0].main
+          conditions: res.data.weather[0].main,
+          icons: res.data.weather[0].id
         });
       })
       .catch(err => {
         console.error(err);
       });
   }
-
   componentDidMount() {
     if (this.state.weather) {
       this.getWeather();
+      this.getIcon();
     }
   }
 
@@ -58,38 +81,88 @@ class Weather extends Component {
     e.preventDefault();
     this.getWeather();
   };
+
   render() {
+    let icons = this.state.icons;
+    let icon;
+    if (icons === 800) {
+      icon = <WiDaySunny className={styles.icon} size={100} />;
+    } else if (icons > 800 && icons <= 804) {
+      icon = <WiDayCloudy size={100} />;
+    } else if (icons >= 500 && icons <= 531) {
+      icon = <WiDayRain size={100} />;
+    } else if (icons >= 200 && icons <= 232) {
+      icon = <WiDayThunderstorm size={100} />;
+    } else if (icons >= 600 && icons <= 622) {
+      icon = <WiDaySnow size={100} />;
+    } else if (icons === 701 || icons === 741) {
+      icon = <WiDayFog size={100} />;
+    }
+
     return (
       <div className={styles.weather}>
-        <ul className={styles.info}>
-          <li>
-            Current time: <Clock format={"hh:mm:ss"} ticking={true} />
-          </li>
-          <li>City: &nbsp; {this.state.city}</li>
-          <li>Country:&nbsp; {this.state.country}</li>
-          <li>Conditions: &nbsp; {this.state.conditions}</li>
-          <li>Humidity:&nbsp; {this.state.humidity}</li>
-          <li>Current Temp: &nbsp; {this.state.currentTemp}</li>
-          <li>Est High: &nbsp; {this.state.tempMax}</li>
-          <li>Est Low: &nbsp; {this.state.tempMin}</li>
-        </ul>
-        <form className={styles.inputForm} onSubmit={this.handleSubmit}>
-          <input
-            className={styles.inputForm}
-            type="text"
-            value={this.state.value}
-            placeholder="City"
-            onChange={this.handleChange}
-          />
-          <input
-            className={styles.inputForm}
-            type="text"
-            placeholder="Country"
-          />
-          <button className={styles.inputForm} type="submit">
-            Submit
-          </button>
-        </form>
+        <Clock className={styles.clock} format={"hh:mm"} ticking={true} />
+        {this.state.city ? (
+          <div className={styles.info}>
+            <ul>
+              <li>{icon}</li>
+              <li>{this.state.city}</li>
+              <li>{this.state.country}</li>
+              <li>{this.state.conditions}</li>
+              <li className={styles.humidity}>
+                {this.state.humidity}
+                <span>
+                  <WiHumidity size={35} />
+                </span>
+              </li>
+              <li className={styles.left}>
+                {Math.round(this.state.tempMin)}
+                <span>&deg;</span>
+                <span>Lo</span>
+              </li>
+              <li className={styles.center}>
+                {Math.round(this.state.currentTemp)}
+                <span>&deg;</span>
+              </li>
+              <li className={styles.right}>
+                {Math.round(this.state.tempMax)}
+                <span>&deg;</span>
+                <span>Hi</span>
+              </li>
+            </ul>
+            <a>
+              <FontAwesomeIcon icon={faChevronCircleLeft} />
+            </a>
+          </div>
+        ) : null}
+        {this.state.weather ? null : (
+          <div className={styles.formWrap}>
+            <form
+              className={this.state.visible ? styles.clicked : styles.fadeForm}
+              onSubmit={this.handleSubmit}
+            >
+              <input
+                className={styles.city}
+                type="text"
+                value={this.state.value}
+                placeholder="City"
+                onChange={this.handleChange}
+              />
+              <input
+                className={styles.country}
+                type="text"
+                placeholder="Country"
+              />
+              <button
+                className={styles.button}
+                onClick={this.makeFade}
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     );
   }

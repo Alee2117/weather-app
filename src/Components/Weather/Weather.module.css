@@ -1,36 +1,212 @@
-/* body {
+.weather {
   height: 100%;
   width: 100%;
-} */
-
-.weather {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  position: absolute;
 }
 
-.inputForm {
-  font-size: 20px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 4;
-  padding: 20px;
-  margin: 10px;
-  width: 75%;
-}
-
-.info {
-  list-style-type: none;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 4;
-  padding-left: 10px;
-  margin-bottom: 30px
+ul {
+  font-size: 30px;
+  display: inline-block;
+  text-align: center;
+  width: 77%;
+  animation-name: fadeIn;
+  animation-duration: 6s;
 }
 
 li {
-  margin: 20px;
-  border-bottom: 1px solid whitesmoke;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  margin: 8% auto;
+  align-content: center;
+  height: 80%;
+}
+
+span {
+  font-size: 10px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+input {
+  font-size: 20px;
+  display: block;
+  margin: 10px auto;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  outline: none;
+}
+input:hover {
+  cursor: text;
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+button {
+  display: block;
+  font-size: 20px;
+  border: none;
+  margin: 30px auto;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  width: 50%;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #fcf9f933;
+  opacity: 0.5;
+}
+
+.clock {
+  font-size: 90px;
+  display: flex;
+  justify-content: center;
+  height: 1%;
+  margin-bottom: 20%;
+}
+
+a {
+  font-size: 2rem;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  position: absolute;
+  top: 93%;
+}
+
+.humidity {
+  display: flex;
+  position: relative;
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
+  left: 10px;
+}
+
+.left,
+.center,
+.right {
+  display: inline-flex;
+  font-size: 40px;
+  position: relative;
+  right: 9px;
+  margin: 25px 0;
+  width: 12vw;
+  height: 100%;
+}
+
+.center {
+  margin: 0px 40px;
+}
+
+.clicked {
+  text-align: center;
+  position: relative;
+  animation-name: fadeOut;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+.formWrap {
+  height: 10%;
+  margin-top: 50%;
+}
+
+.fadeForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    bottom: 439px;
+  }
+  100% {
+    opacity: 0;
+    bottom: 10rem;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .clock {
+    font-size: 60px;
+    margin-bottom: 10%;
+  }
+
+  ul {
+    font-size: 20px;
+  }
+
+  .humidity {
+    font-size: 28px;
+    margin: 0 auto;
+  }
+
+  .left,
+  .center,
+  .right {
+    font-size: 30px;
+  }
+
+  a {
+    font-size: 28px;
+    top: 91%;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 580px) {
+  .humidity {
+    margin-bottom: 2%;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .clock {
+    margin: 5% auto;
+  }
+
+  ul {
+    width: 95%;
+    margin-top: 0;
+  }
+
+  li {
+    margin: 2% auto;
+  }
+  .formWrap {
+    margin: 10% auto;
+  }
+
+  button {
+    width: 16%;
+    height: 40px;
+  }
+
+  a {
+    display: none;
+  }
 }
