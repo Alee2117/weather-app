@@ -2,6 +2,7 @@
   height: 100%;
   width: 100%;
   position: absolute;
+  overflow: hidden;
 }
 
 ul {
@@ -117,6 +118,7 @@ a {
   animation-name: fadeOut;
   animation-duration: 4s;
   animation-fill-mode: forwards;
+  /* animation-direction: reverse; */
 }
 
 .formWrap {
@@ -134,11 +136,13 @@ a {
 @keyframes fadeOut {
   0% {
     opacity: 1;
-    bottom: 439px;
+    bottom: 88vh;
+    margin: 10px auto;
   }
   100% {
     opacity: 0;
     bottom: 10rem;
+    margin: 10px auto;
   }
 }
 
@@ -161,15 +165,20 @@ a {
     font-size: 20px;
   }
 
+  li {
+    margin-right: 10%;
+  }
+
   .humidity {
     font-size: 28px;
-    margin: 0 auto;
+    margin-bottom: 0;
   }
 
   .left,
   .center,
   .right {
-    font-size: 30px;
+    font-size: 26px;
+    right: 7%;
   }
 
   a {
@@ -182,23 +191,62 @@ a {
   .humidity {
     margin-bottom: 2%;
   }
+
+  .formWrap {
+    margin: 50% auto;
+  }
+  a {
+    font-size: 40px;
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width: 581px) and (max-width: 1024px) {
+  li {
+    margin-left: 15%;
+  }
+  .left,
+  .center,
+  .right {
+    left: 6%;
+    margin-top: 15%;
+  }
+  .clock {
+    margin-bottom: 10%;
+  }
+
+  .formWrap {
+    margin: 50% auto;
+  }
+
+  a {
+    font-size: 50px;
+    margin-left: 10px;
+  }
+
+  .weather {
+    overflow: hidden;
+  }
 }
 
 @media only screen and (min-width: 1025px) {
   .clock {
-    margin: 5% auto;
+    margin: 0;
+    margin-right: 6%;
   }
 
   ul {
-    width: 95%;
-    margin-top: 0;
+    width: 90%;
+    font-size: 35px;
   }
 
   li {
-    margin: 2% auto;
+    margin: 5% auto;
   }
   .formWrap {
-    margin: 10% auto;
+    margin: 20% auto;
+    margin-right: 6%;
   }
 
   button {
