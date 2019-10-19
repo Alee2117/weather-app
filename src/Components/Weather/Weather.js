@@ -21,7 +21,8 @@ import {
   WiNightAltSnow
 } from "weather-icons-react";
 import axios from "axios";
-import styles from "./Weather.module.css";
+// import styles from "./Weather.module.css";
+import styles from "./weathers.module.css";
 import Clock from "react-live-clock";
 
 class Weather extends Component {
@@ -86,51 +87,55 @@ class Weather extends Component {
     let icons = this.state.icons;
     let icon;
     if (icons === 800) {
-      icon = <WiDaySunny className={styles.icon} size={100} />;
+      icon = <WiDaySunny className={styles.icon} size={120} />;
     } else if (icons > 800 && icons <= 804) {
-      icon = <WiDayCloudy size={100} />;
+      icon = <WiDayCloudy size={120} />;
     } else if (icons >= 500 && icons <= 531) {
-      icon = <WiDayRain size={100} />;
+      icon = <WiDayRain size={120} />;
     } else if (icons >= 200 && icons <= 232) {
-      icon = <WiDayThunderstorm size={100} />;
+      icon = <WiDayThunderstorm size={120} />;
     } else if (icons >= 600 && icons <= 622) {
-      icon = <WiDaySnow size={100} />;
+      icon = <WiDaySnow size={120} />;
     } else if (icons === 701 || icons === 741) {
-      icon = <WiDayFog size={100} />;
+      icon = <WiDayFog size={120} />;
     }
 
     return (
-      <div className={styles.weather}>
-        <Clock className={styles.clock} format={"hh:mm"} ticking={true} />
+      <div className={styles.weatherWrap}>
+        <div className={styles.clock}>
+          <Clock format={"hh:mm"} ticking={true} />
+        </div>
         {this.state.city ? (
-          <div className={styles.info}>
-            <ul>
-              <li>{icon}</li>
+          <div className={styles.infoWrap}>
+            <ul className={styles.info}>
+              <li className={styles.icon}>{icon}</li>
               <li>{this.state.city}</li>
               <li>{this.state.country}</li>
               <li>{this.state.conditions}</li>
               <li className={styles.humidity}>
                 {this.state.humidity}
                 <span>
-                  <WiHumidity size={35} />
+                  <WiHumidity size={30} />
                 </span>
               </li>
-              <li className={styles.left}>
-                {Math.round(this.state.tempMin)}
-                <span>&deg;</span>
-                <span>Lo</span>
-              </li>
-              <li className={styles.center}>
-                {Math.round(this.state.currentTemp)}
-                <span>&deg;</span>
-              </li>
-              <li className={styles.right}>
-                {Math.round(this.state.tempMax)}
-                <span>&deg;</span>
-                <span>Hi</span>
-              </li>
+              <div className={styles.temp}>
+                <li className={styles.left}>
+                  {Math.round(this.state.tempMin)}
+                  <span>&deg;</span>
+                  <span className={styles.loHi}>Lo</span>
+                </li>
+                <li className={styles.center}>
+                  {Math.round(this.state.currentTemp)}
+                  <span>&deg;</span>
+                </li>
+                <li className={styles.right}>
+                  {Math.round(this.state.tempMax)}
+                  <span>&deg;</span>
+                  <span className={styles.loHi}>Hi</span>
+                </li>
+              </div>
             </ul>
-            <a>
+            <a className={styles.backArrow}>
               <FontAwesomeIcon icon={faChevronCircleLeft} />
             </a>
           </div>
@@ -142,14 +147,14 @@ class Weather extends Component {
               onSubmit={this.handleSubmit}
             >
               <input
-                className={styles.city}
+                className={styles.formInput}
                 type="text"
                 value={this.state.value}
                 placeholder="City"
                 onChange={this.handleChange}
               />
               <input
-                className={styles.country}
+                className={styles.formInput}
                 type="text"
                 placeholder="Country"
               />

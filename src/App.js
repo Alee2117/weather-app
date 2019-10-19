@@ -1,10 +1,11 @@
 import React from "react";
-import styles from "./App.module.css";
+// import styles from "./App.module.css";
+import styles from "./App.module.copy.css";
 import Weather from "./Components/Weather/Weather";
 
 const App = () => {
   return (
-    <div className={styles.App}>
+    <div className={styles.app}>
       <Weather />
     </div>
   );
