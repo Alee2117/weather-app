@@ -156,7 +156,7 @@ class Weather extends Component {
               <input
                 className={styles.formInput}
                 type="text"
-                placeholder="Country"
+                placeholder="State/Country"
               />
               <button
                 className={styles.button}
