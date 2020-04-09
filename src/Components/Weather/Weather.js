@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
-
 import {
   WiDaySunny,
   WiDayRain,
@@ -21,8 +20,8 @@ import {
   WiNightAltSnow
 } from "weather-icons-react";
 import axios from "axios";
-// import styles from "./Weather.module.css";
-import styles from "./weathers.module.css";
+import styles from "./Weather.module.css";
+// import styles from "./weathers.module.css";
 import Clock from "react-live-clock";
 
 class Weather extends Component {
@@ -96,7 +95,7 @@ class Weather extends Component {
       icon = <WiDayThunderstorm size={120} />;
     } else if (icons >= 600 && icons <= 622) {
       icon = <WiDaySnow size={120} />;
-    } else if (icons === 701 || icons === 741) {
+    } else if (icons >= 701 || icons <= 741) {
       icon = <WiDayFog size={120} />;
     }
 
@@ -135,7 +134,7 @@ class Weather extends Component {
                 </li>
               </div>
             </ul>
-            <a className={styles.backArrow}>
+            <a href="index.html" className={styles.backArrow}>
               <FontAwesomeIcon icon={faChevronCircleLeft} />
             </a>
           </div>
