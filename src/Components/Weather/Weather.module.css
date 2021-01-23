@@ -69,6 +69,10 @@ button:hover {
   background: #fcf9f933;
   opacity: 0.5;
 }
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
 
 .clock {
   font-size: 90px;
