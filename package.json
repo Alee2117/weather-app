@@ -14,7 +14,7 @@
     "react-background-slideshow": "^1.0.4",
     "react-dom": "^16.14.0",
     "react-live-clock": "^3.1.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^5.0.1",
     "weather-icons-react": "^1.2.0"
   },
   "scripts": {
